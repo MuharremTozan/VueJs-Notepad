@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+
+   <style>
+      .box {
+         background-color: purple;
+         height: 200px;
+         width: 200px;
+      }
+
+      [v-cloak] {
+         display: none;
+      }
+   </style>
+</head>
+
+<body>
+
+   <div id="app" v-cloak>
+      <!-- v-cloak olmasa hersey display edliyor vue da ama bu sekılde dısplay engelleniyor -->
+      {{message}}
+
+      <input @keyup.enter="greet" v-model="message" />
+      <!-- Vmodel sayesinde message değişkenine çift yönlü erişim sağladık -->
+      <!-- enter tusuna tıklayıp greet fonksiyonunu çalıştırdık -->
+
+      <hr />
+
+      <button @click="toggleBox">Toggle Box</button>
+
+      <div v-if="isVisible" class="box"></div>
+      <!-- v-if boolean true ise divi oluşturuyor -->
+      <!-- v-show ise herhalükarda divi oluşturup gösterip göstermemeyi seçiyor -->
+
+
+
+   </div>
+
+
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <script>
+      let app = Vue.createApp({
+         data: function () {
+            return {
+               message: 'Hello Vue!',
+               isVisible: false
+            }
+         },
+         methods: {
+            toggleBox() {
+               this.isVisible = !this.isVisible
+            },
+            greet() {
+               console.log(this.message)
+            }
+         }
+      })
+      app.mount('#app')
+   </script>
+
+</body>
+
+</html>
